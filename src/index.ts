@@ -8,21 +8,30 @@ import { state } from "./state";
 
 export namespace vucat {
   export function createState<T>(o: state.State<T>): state.State<T> {
-    Object.defineProperty(o, "acr", {
-      value: o.data,
-      writable: true,
-      enumerable: true,
-      configurable: true
-    });
-    Object.defineProperty(o, "data", {
-      get: function () { return this.acr; },
-      set: function (value) {
-        this.acr = value;
-        if (typeof o.handle !== "undefined") o.handle();
-      },
-      enumerable: true,
-      configurable: true
-    })
+    const acrSet = (o: state.State<T>): void => {
+      Object.defineProperty(o, "acr", {
+        value: o.data,
+        writable: true,
+        enumerable: true,
+        configurable: true
+      });
+    };
+
+    const dataSet = (o: state.State<T>): void => {
+      Object.defineProperty(o, "data", {
+        get: function () { return this.acr; },
+        set: function (value) {
+          this.acr = value;
+          if (typeof o.handle !== "undefined") o.handle();
+        },
+        enumerable: true,
+        configurable: true
+      })
+    };
+
+    acrSet(o);
+    dataSet(o);
+
     return o;
   }
 };
