@@ -1,0 +1,13 @@
+{
+  "name": "vucat",
+  "version": "1.0.0",
+  "description": "",
+  "module": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
