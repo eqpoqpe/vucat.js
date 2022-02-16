@@ -1,2 +1,2 @@
-# vucat.js
+# Vucat
 `Data First` `Changed Rendering`
