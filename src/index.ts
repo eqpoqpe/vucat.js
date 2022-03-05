@@ -4,10 +4,17 @@
  * Copyright (c) 2022 Ryan Martin
  */
 
-import { state } from "./state";
+import state from "./state";
 
-export namespace vucat {
-  export function createState<T>(o: state.State<T>): state.State<T> {
+namespace vucat {
+
+  /**
+   * createState
+   * 
+   * in Branch Jennie of vucat.js.
+   * When o.data has changed, call handle function
+   */
+  export function createState<T>(init: state.State<T>): state.State<T> {
     const acrSet = (o: state.State<T>): void => {
       Object.defineProperty(o, "acr", {
         value: o.data,
@@ -21,42 +28,36 @@ export namespace vucat {
       Object.defineProperty(o, "data", {
         get: function () { return this.acr; },
         set: function (value) {
-          this.acr = value;
-          if (typeof o.handle !== "undefined") o.handle();
+          if (typeof o.cmpv !== "undefined" && o.cmpv(value)) {
+            this.acr = value;
+
+            if (typeof o.handle !== "undefined") o.handle(value);
+          } else {
+            this.acr = value;
+
+            if (typeof o.handle !== "undefined") o.handle();
+          }
         },
         enumerable: true,
         configurable: true
       })
     };
 
-    acrSet(o);
-    dataSet(o);
+    acrSet(init);
+    dataSet(init);
 
-    return o;
+    return init;
+  }
+
+  /**
+   */
+  export function Layout(template: string | state.State<any>): void {
+
+    // return layout.Layout();
+    console.log(template);
   }
 };
 
-export function pullData(tableRes: any, queryURL: string): void {
-  var res: any;
+const createState = vucat.createState;
 
-  fetch(queryURL)
-    .then(res => res.json())
-    .then(
-      (result) => {
-        tableRes = result;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-}
-
-export function pushData(data: any, queryURL: string) {
-  fetch(queryURL, {
-    method: "PUT",
-    headers: {
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-}
+export { createState };

@@ -4,7 +4,7 @@
  * Copyright (c) 2022 Ryan Martin
  */
 
-export namespace state {
+namespace state {
   export interface State<T> {
 
     // init value of data
@@ -14,12 +14,11 @@ export namespace state {
     // can modtify value
     acr?: T;
 
-    /**
-     * State.handle
-     * 
-     * when data has chenage, call handle function
-     */
-    handle?(): void
+    // State.handle
+    // when data has chenage, call handle function
+    handle?(tmp?: string): void;
+    cmpv?(expect: T): boolean;
   };
 };
 
+export default state;
