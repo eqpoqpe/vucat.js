@@ -1,3 +1,5 @@
+import setEvent from "./event";
+
 /**
  * @param pager Array every exec will return Element or Elements
  */
@@ -12,18 +14,16 @@ export default function Render(pager, root) {
 
   if (isHTMLElement(root)) {
     if ("body" in page) {
-      if (Array.isArray(page.body)) {
-        let components = [...page.body];
+      let components = [...page.body];
 
-        components.forEach((c) => {
-          let r = c();
+      components.forEach((lay, index) => {
+        let res = lay();
 
-          if (typeof r !== "undefined") {
-            ElementAppend(root, r.element);
-          }
-        });
-        // c => Element or Elements
-      }
+        if (res) {
+          ElementAppend(root, res.element);
+          setEvent(res.pevents);
+        }
+      });
     }
   } else {
     throw "Type Error: root isn't a HTMLElement can't render page";
