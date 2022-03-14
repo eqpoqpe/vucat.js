@@ -24,8 +24,8 @@ const isEmptyObject = (o) => { return (Object.keys(o).length === 0) ? true : fal
  * 
  * style
  * 
- * @param el
- * @param po property object
+ * @param {HTMLElement} el
+ * @param {Object} po property object
  */
 const attribute = (el, po) => {
 	if (isKeyExists("aliasID", po)) {
