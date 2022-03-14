@@ -45,8 +45,9 @@ const attribute = (el, po) => {
 }
 
 /**
- * @param eot single events table Cold Array
- * @param recv receive present events
+ * @param {string} truth
+ * @param {Array} eot single events table Cold Array
+ * @param {Array} recv receive present events
  * @returns array
  */
 function AnalyzeEventsTable(truth, [...eot], recv) {
@@ -86,8 +87,9 @@ function AnalyzeEventsTable(truth, [...eot], recv) {
 }
 
 /**
- * @param eot elements table
- * @param recv receive present events
+ * @param {HTMLElement} pr pseudo root
+ * @param {Array} eot elements table
+ * @param {Array} recv receive present events
  */
 function AnalyzeElementsTable(pr, [...eot], recv, who) {
 	const coldLength = ([...r]) => { return r; };
