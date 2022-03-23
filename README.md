@@ -1,2 +1,1 @@
 # Vucat
-data first | string
