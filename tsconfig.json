@@ -1,0 +1,12 @@
+{
+  "files": ["./src/index.ts", "./test/index.test.ts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES6",
+    "declaration": true,
+    "rootDir": "./",
+    "outDir": "./dist",
+    "module": "ES6",
+    "strict": true
+  }
+}
